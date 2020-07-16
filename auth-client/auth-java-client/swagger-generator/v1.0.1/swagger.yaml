@@ -1,0 +1,269 @@
+swagger: '2.0'
+info:
+  description: 更多信息请联系基础框架团队
+  version: '1.0'
+  title: PAAS平台中央认证和授权系统
+  termsOfService: 'http://localhost/'
+host: 'localhost'
+basePath: /
+tags:
+  - name: o-auth-2-endpoint
+    description: O Auth 2 Endpoint
+paths:
+  /api/authorize:
+    post:
+      tags:
+        - o-auth-2-endpoint
+      summary: OAuth2授权点
+      description: 授权点颁发authorization code
+      operationId: authorizeUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: clientVO
+          description: clientVO
+          required: true
+          schema:
+            $ref: '#/definitions/ClientVO'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Response«AuthCodeVO»'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/introspect:
+    post:
+      tags:
+        - o-auth-2-endpoint
+      summary: OAuth2令牌检查点
+      description: 检查令牌
+      operationId: introspectTokenUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: token
+          description: token
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Response«ValidityVO»'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/revoke:
+    post:
+      tags:
+        - o-auth-2-endpoint
+      summary: OAuth2令牌吊销点
+      description: 吊销令牌
+      operationId: revokeTokenUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: token
+          description: token
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Response«string»'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/token:
+    post:
+      tags:
+        - o-auth-2-endpoint
+      summary: OAuth2令牌颁发点
+      description: 颁发令牌access/refresh token
+      operationId: issueTokenUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: grantRequestVO
+          description: grantRequestVO
+          required: true
+          schema:
+            $ref: '#/definitions/GrantRequestVO'
+        - name: Authorization
+          in: header
+          description: Authorization
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Response«OAuth2AccessToken»'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+definitions:
+  ClientVO:
+    type: object
+    properties:
+      clientId:
+        type: string
+      clientSecret:
+        type: string
+      description:
+        type: string
+      id:
+        type: integer
+        format: int64
+      ownerName:
+        type: string
+      redirectUrl:
+        type: string
+      rememberChoice:
+        type: string
+      scopes:
+        type: array
+        items:
+          type: string
+  GrantRequestVO:
+    type: object
+    properties:
+      code:
+        type: string
+      grant_type:
+        type: string
+        enum:
+          - AUTHORIZATION_CODE
+          - REFRESH_TOKEN
+      refresh_token:
+        type: string
+  Response«ValidityVO»:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      details:
+        $ref: '#/definitions/ValidityVO'
+      message:
+        type: string
+  Response«string»:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      details:
+        type: string
+      message:
+        type: string
+  ValidityVO:
+    type: object
+    properties:
+      isValid:
+        type: boolean
+  Response«OAuth2AccessToken»:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      details:
+        $ref: '#/definitions/OAuth2AccessToken'
+      message:
+        type: string
+  OAuth2AccessToken:
+    type: object
+    properties:
+      additionalInformation:
+        type: object
+      expiration:
+        type: string
+        format: date-time
+      expired:
+        type: boolean
+      expiresIn:
+        type: integer
+        format: int32
+      refreshToken:
+        $ref: '#/definitions/OAuth2RefreshToken'
+      scope:
+        type: array
+        items:
+          type: string
+      tokenType:
+        type: string
+      value:
+        type: string
+  OAuth2RefreshToken:
+    type: object
+    properties:
+      value:
+        type: string
+  Response«AuthCodeVO»:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      details:
+        $ref: '#/definitions/AuthCodeVO'
+      message:
+        type: string
+  AuthCodeVO:
+    type: object
+    properties:
+      clientName:
+        type: string
+      code:
+        type: string
+      expiration:
+        type: string
+        format: date-time
+      id:
+        type: integer
+        format: int64
+      insertTime:
+        type: string
+        format: date-time
+      redirectUrl:
+        type: string
+      userName:
+        type: string

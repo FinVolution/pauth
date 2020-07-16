@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录回调页面</title>
+</head>
+<body>
+
+<h2>登录回调页面</h2>
+<p id="prompt_msg">登录中......</p>
+<button id="btn_home" style="display: none"><a href="http://localhost:8600/">回到首页</a></button>
+
+
+</body>
+
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery.cookie/1.4.1/jquery.cookie.js"></script>
+<script>
+
+    function qs(key) {
+        key = key.replace(/[*+?^$.\[\]{}()|\\\/]/g, "\\$&"); // escape RegEx meta chars
+        var match = location.search.match(new RegExp("[?&]" + key + "=([^&]+)(&|$)"));
+        return match && decodeURIComponent(match[1].replace(/\+/g, " "));
+    }
+
+    // 获取跳转回带回的access token信息，并存储到cookie中
+    let access_token = qs("token");
+    if(access_token != null){
+        $.cookie("access_token", access_token, {path: '/'});
+        $("#prompt_msg").text("登录成功，马上回到首页。");
+        window.location.replace("http://localhost:8600/");
+    } else {
+        $("#prompt_msg").text("登录失败，请回到首页，重新尝试登录。");
+        $("#btn_home").css("display", "block");
+    }
+
+
+</script>
+</html>

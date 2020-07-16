@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Demo - Logout</h2>
+<p>请点击登出按钮，这会清除登录的cookie信息。</p>
+
+<table>
+    <tbody>
+    <tr>
+        <td>请点击登出按钮</td>
+        <td>
+            <button id="btn_logout_api">登出</button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<ol>
+    <li><a href="http://localhost:8100/index.html">回到首页</a></li>
+    <li><a href="http://localhost:8100/login.html">登录页面</a></li>
+    <li><a href="http://localhost:8100/logout.html">注销登录页面</a></li>
+</ol>
+
+</body>
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript">
+
+    $("#btn_logout_api").click(function () {
+
+        $.ajax({
+            url: "/api/logout",
+            type: "POST",
+            data: null,
+            processData: false,
+            contentType: "application/json;charset=utf-8",
+            success: function (data, status, ajax) {
+                console.log("succeeded to logout.");
+                alert("已成功登出，用户登录的cookie信息已清除。");
+            },
+            fail: function () {
+                console.log("fail to logout.");
+                alert("登出失败");
+            }
+        });
+
+    });
+
+</script>
+</html>

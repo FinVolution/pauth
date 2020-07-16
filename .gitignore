@@ -1,0 +1,55 @@
+# maven ignore
+target/
+*.jar
+*.war
+*.zip
+*.tar
+*.tar.gz
+*pom.xml.versionsBackup
+
+# eclipse ignore
+.settings/
+.project
+.classpath
+
+# idea ignore
+.idea/
+*.ipr
+*.iml
+*.iws
+
+# temp ignore
+logs/
+*.docpom.xml
+*.log
+*.cache
+*.diff
+*.patch
+*.tmp
+
+# system ignore
+.DS_Store
+Thumbs.db
+
+*.class
+
+# front project
+auth-front/dist/
+auth-front/node_modules/
+auth-front/.idea
+auth-front/*.iws
+auth-front/*.iml
+auth-front/*.ipr
+
+# backend server project
+auth-server/.idea
+auth-server/target/
+auth-server/.settings/
+auth-server/.project
+auth-server/.classpath
+auth-server/.mvn/
+auth-server/mvnw
+auth-server/mvnw.cmd
+
+# node project
+node_modules/

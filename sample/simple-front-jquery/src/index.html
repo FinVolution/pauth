@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>演示implicit grant授权</title>
+</head>
+<body>
+
+<h2>演示implicit grant授权</h2>
+<p>请点击登录按钮，跳转到auth server授权页面，进行登录。</p>
+<p>登录成功后将显示当前登录的用户名。</p>
+
+<table>
+    <tbody>
+    <tr>
+        <td>
+            <button id="btn_login">登录</button>
+        </td>
+        <td>
+            <button id="btn_logout">注销</button>
+        </td>
+    </tr>
+    <tr>
+        <td>当前登录用户：</td>
+        <td><input type="text" name="username" value="未知"></td>
+    </tr>
+    </tbody>
+</table>
+
+
+<div>
+    <div>用户的所有信息：</div>
+    <textarea rows="6" name="tokenInfo" style="width: 600px"></textarea>
+</div>
+
+</body>
+
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery.cookie/1.4.1/jquery.cookie.js"></script>
+<script type="text/javascript" src="jwt-token.js"></script>
+<script>
+
+    let token = $.cookie("access_token");
+    if (token != null) {
+        //解析token，更新登录的用户
+        let codes = token.split('.');
+        if (codes.length == 3) {
+            let tokenInfo = JSON.parse(jwt.base64urldecode(codes[1]));
+
+            let tokenDisplay = "";
+            for (let key in tokenInfo) {
+                console.log(key + ": " + tokenInfo[key]);
+                tokenDisplay += key + ": " + tokenInfo[key] + ";";
+            }
+
+            // 更新用户登录信息
+            $("textarea[name='tokenInfo']").val(JSON.stringify(tokenInfo));
+            $("input[name='username']").val(tokenInfo["sub"]);
+        }
+    }
+
+    $("#btn_login").click(function () {
+
+        // 跳转到pauth server授权页面
+        let callback_url = "http%3A%2F%2Flocalhost%3A8600%2Fcallback.html";
+        let auth_server_url = "http://localhost/#/authorize?response_type=token&scope=read&client_id=demo&redirect_uri=" + callback_url;
+        window.location.replace(auth_server_url);
+
+    });
+
+    $("#btn_logout").click(function () {
+
+        // 从cookie中注销登录信息
+        $.removeCookie("access_token");
+
+        // 清空登录的用户名
+        $("input[name='username']").val("未知");
+        $("textarea[name='tokenInfo']").val("");
+
+    });
+
+
+</script>
+</html>

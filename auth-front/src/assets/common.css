@@ -1,0 +1,71 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0px;
+}
+
+#app {
+    height: 100%;
+}
+
+.header {
+    background-color: rgb(32, 160, 255);
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    height: 70px;
+    font-size: 22px;
+    line-height: 70px;
+    color: #fff;
+}
+
+.header .title {
+    display: table;
+    cursor: pointer;
+    margin-left: 20px;
+    float: left;
+    font-size: 24px;
+}
+
+.header .title:hover {
+    color: #337ab7;
+}
+
+.header .title i {
+    font-size: 30px;
+}
+
+.header .logo {
+    margin-right: 5px;
+}
+
+.nav-bar {
+    padding-bottom: 20px;
+}
+
+.embeded_form {
+    margin-top: 20px;
+    padding: 10px 30px;
+    border: 1px solid #eaeefb;
+    border-radius: 4px;
+    transition: .2s;
+}
+
+.query-input {
+    width: 200px;
+    margin-right: 40px;
+}
+
+.el-notification__content {
+    margin: 6px 0;
+}
+
+.client-dialog .el-dialog__body {
+    padding-top: 0;
+}
+
+.client-dialog .el-form-item {
+    margin-bottom: 0;
+}

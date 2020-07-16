@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello, This is user service.</title>
+</head>
+<body>
+<h2>Demo - Home - 演示OAuth 2.0 Resource Owner Password Grant</h2>
+<p>请先到登录页面，尝试登录，然后访问后端api，获取用户登录信息</p>
+
+
+<table>
+    <tbody>
+    <tr>
+        <td>请点击访问后端API，获取用户信息</td>
+        <td>
+            <button id="btn_read_user_info">获取用户信息</button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<ol>
+    <li><a href="http://localhost:8100/index.html">回到首页</a></li>
+    <li><a href="http://localhost:8100/login.html">登录页面</a></li>
+    <li><a href="http://localhost:8100/logout.html">注销登录页面</a></li>
+</ol>
+
+</body>
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript">
+
+    $("#btn_read_user_info").click(function () {
+
+        $.ajax({
+            url: "/user",
+            type: "GET",
+            processData: false,
+            contentType: "application/json;charset=utf-8",
+            success: function (data, status, ajax) {
+                alert(JSON.stringify(data));
+            },
+            error: function (ajax, status, error) {
+                alert("无法获取用户信息，请先登录。");
+            }
+        });
+
+    });
+
+
+</script>
+</html>

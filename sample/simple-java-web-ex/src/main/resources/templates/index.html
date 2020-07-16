@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/index.css}" />
+</head>
+<body>
+    <div class="header">
+        <div class="user-info" th:if="${userName} ne null">
+            <span th:text="${userName}"></span>
+            <div class="dropdown-menu">
+                <a href="/logout" class="dropdown-menu-item">退出</a>
+            </div>
+        </div>
+        <div class="user-info" th:if="${userName} eq null">
+            <span>您好，请登录</span>
+            <div class="dropdown-menu">
+                <a href="/login" class="dropdown-menu-item">登录</a>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script th:src="@{/js/index.js}"></script>
+</body>
+</html>

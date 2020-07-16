@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.ppdai.auth</groupId>
+    <artifactId>pauth-sample</artifactId>
+    <packaging>pom</packaging>
+    <version>1.1.1-SNAPSHOT</version>
+    <modules>
+        <module>simple-java-web</module>
+        <module>simple-java-web-ex</module>
+        <module>simple-spring-web/server</module>
+        <module>simple-spring-web-ex/server</module>
+        <module>simple-java-client/resource-server</module>
+        <module>simple-java-client/resource-client</module>
+    </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <springboot.version>1.5.8.RELEASE</springboot.version>
+        <pauth.version>1.2.8</pauth.version>
+    </properties>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.8.RELEASE</version>
+    </parent>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Edgware.SR2</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.ppdai.auth</groupId>
+                <artifactId>pauth</artifactId>
+                <version>${pauth.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ppdai.auth</groupId>
+                <artifactId>pauth-common</artifactId>
+                <version>${pauth.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ppdai.auth</groupId>
+                <artifactId>pauth-client</artifactId>
+                <version>${pauth.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ppdai.auth</groupId>
+                <artifactId>pauth-java-client</artifactId>
+                <version>${pauth.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ppdai.auth</groupId>
+                <artifactId>pauth-spring-client</artifactId>
+                <version>${pauth.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ppdai.auth</groupId>
+                <artifactId>pauth-spring-filter</artifactId>
+                <version>${pauth.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ppdai.auth</groupId>
+                <artifactId>pauth-spring-support</artifactId>
+                <version>${pauth.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

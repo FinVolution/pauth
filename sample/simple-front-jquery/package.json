@@ -1,0 +1,14 @@
+{
+  "name": "simple-front-jquery",
+  "version": "1.0.0",
+  "description": "this is a demo app for oauth 2.0 implicit grant.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "michael",
+  "license": "Apache License 2.0",
+  "dependencies": {
+    "express": "^4.15.3"
+  }
+}

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello, This is demo project</title>
+</head>
+<body>
+<h2>Demo - OAuth 2.0 Resource Owner Password Grant</h2>
+<p>请输入用户名和密码，并点击登录按钮</p>
+
+<table>
+    <tbody>
+    <tr>
+        <td>User:</td>
+        <td><input type="text" name="username" value=""></td>
+    </tr>
+    <tr>
+        <td>Password:</td>
+        <td><input type="password" name="password"></td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <button id="btn_login">登录</button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<ol>
+    <li><a href="http://localhost:8100/index.html">回到首页</a></li>
+    <li><a href="http://localhost:8100/login.html">登录页面</a></li>
+    <li><a href="http://localhost:8100/logout.html">注销登录页面</a></li>
+</ol>
+
+</body>
+
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript">
+
+    $("#btn_login").click(function () {
+
+        let userName = $("input[name='username']").val();
+        let userPwd = $("input[name='password']").val();
+
+        if (userName == null || userName == "" || userPwd == null || userPwd == "") {
+            alert("用户名和密码不能为空");
+        } else {
+            let data = {
+                "userName": userName,
+                "userPwd": userPwd
+            };
+
+            $.ajax({
+                url: "/api/login",
+                type: "POST",
+                data: JSON.stringify(data),
+                processData: false,
+                contentType: "application/json;charset=utf-8",
+                success: function (data, status, ajax) {
+                    console.log("succeeded to login.");
+                    alert("登录成功，Token信息已保存到了cookie中");
+                },
+                error: function (ajax, status, error) {
+                    console.log("fail to login.");
+                    alert("登录失败，无法获取授权。请确认输入的用户名和密码正确，或者检查授权登录服务器是否在运行。");
+                }
+            });
+        }
+
+    });
+
+
+</script>
+
+</html>
