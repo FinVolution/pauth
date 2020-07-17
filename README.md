@@ -46,13 +46,8 @@ TBD
 ### 5.1 下载项目代码
 使用git命令下载项目代码，
 ```
-git clone pauth
+git clone https://github.com/ppdaicorp/pauth.git
 ```
-
-主要有如下三种分支，
-- 主分支：master
-- 开发分支：dev
-- 发布分支：根据版本号命名
 
 ### 5.2 项目代码结构
 
@@ -101,24 +96,17 @@ git clone pauth
 
 下面为各个项目构建和运行的简要描述，具体可以参考各个子项目的README.md文件
 
-1. 前端：Nodejs 6.9.1
-   - 前端构建命令为，
+编译和运行依赖的组件：JDK 8 + Maven 3.3.9 + MySQL5.7
+   - 进入auth-server模块
+   - 分别把src/main/resources/init.sql和src/main/resources/data.sql导入到MySQL中
+   - 修改src/main/resources/application.properties中的数据库配置（spring.datasource.url, spring.datasource.username, spring.datasource.password）为正确值
+   - 执行如下命令打包
    ``` bash
-   npm run build
+   mvn clean package -DskipTests=true
    ```
-   - 前端运行命令为，
+   - 运行命令启动服务
    ``` bash
-   npm run dev
-   ```
-2. 后端：JDK 8 + Maven 3.3.9 + Mysql
-   - 后端构建命令为，
-   ``` bash
-   mvn versions:set -DnewVersion=1.0.1-SNAPSHOT
-   mvn clean package
-   ```
-   - 后端运行命令为（参考样例，具体jar包的名字和版本根据子项目而变化），
-   ``` bash
-   java -jar pauth-0.0.1-SNAPSHOT.jar
+   java -jar pauth-server.jar
    ```
    - 注：若使用JDK 9，建议使用Maven 3.5以上版本进行构建。
 
@@ -126,8 +114,5 @@ git clone pauth
 
 请进入各个子项目，阅读提供README文件来进行项目的构建和开发运行
 
-## 7. 联系
-我们的邮箱地址：framework@xxx.com，欢迎来信联系。
-
-## 8. 开源许可协议
+## 7. 开源许可协议
 Apache License 2.0
