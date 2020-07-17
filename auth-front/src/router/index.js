@@ -8,22 +8,22 @@ import BlankPage from '../pages/Blank.vue'
 import Layout from '../pages/Layout.vue'
 import Login from '../pages/Login.vue'
 
-import AdminPage from '../pages/admin/Index.vue'
+import AdminPage from '../pages/admin/index.vue'
 import ClientList from '../pages/admin/ClientList.vue'
 import TokenList from '../pages/admin/TokenList.vue'
 import UserList from '../pages/admin/UserList.vue'
 import ApprovedSiteList from '../pages/admin/ApprovedSiteList.vue'
 import AuditLogList from '../pages/admin/AuditLogList.vue'
 
-import UserPage from '../pages/user/Index.vue'
+import UserPage from '../pages/user/index.vue'
 import MyApprovedSite from '../pages/user/MyApprovedSite.vue'
 import MyToken from '../pages/user/MyToken.vue'
 
-import DevPage from '../pages/dev/Index.vue'
+import DevPage from '../pages/dev/index.vue'
 import RegisterClient from '../pages/dev/RegisterClient.vue'
 import MyClient from '../pages/dev/MyClient.vue'
 
-import UserAccountPage from '../pages/useraccount/Index.vue'
+import UserAccountPage from '../pages/useraccount/index.vue'
 import ChangeInfo from '../pages/useraccount/ChangeInfo.vue'
 import ChangePwd from '../pages/useraccount/ChangePwd.vue'
 
